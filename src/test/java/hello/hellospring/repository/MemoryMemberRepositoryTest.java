@@ -16,7 +16,7 @@ class MemoryMemberRepositoryTest {
     // 여러 테스트를 한번에 실행하기 어렵다는 단점을 가짐
     // 이러한 단점을 자바는 JUnit이라는 프레임워크로 통해 테스트를 실행해서 문제를 해결함
     // Test는 서로 순서의존도 관계없이 설계 되어야함
-
+    // given(준비) when(실행) then(검증) 패턴
     MemoryMemberRepository repository = new MemoryMemberRepository();
 
     @AfterEach
@@ -28,13 +28,17 @@ class MemoryMemberRepositoryTest {
     }
     @Test
     public void save(){
+        // given(준비)
         Member member = new Member();
         member.setName("spring");
-
         repository.save(member);
+
+        // when(실행)
         Member result = repository.findById(member.getId()).get();
         // Optional으로 값을 꺼낼 떄는 get으로 가능하지만 좋지 않은 방법
-        System.out.println("result = " + (result == member));
+
+        // then(검증)
+//        System.out.println("result = " + (result == member));
         // 출력도 가능하지만 출력값을 계속 볼수 가 없어
 //        Assertions.assertEquals(member,result);
 //        // org.junit.jupiter.api에서 제공하는 Assertions 기능을 사용해도 된다
@@ -49,6 +53,7 @@ class MemoryMemberRepositoryTest {
         Member member1 = new Member();
         member1.setName("spring1");
         repository.save(member1);
+
 
         Member member2 = new Member();
         member2.setName("spring2");
