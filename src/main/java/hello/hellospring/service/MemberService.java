@@ -2,6 +2,8 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,10 +11,16 @@ import java.util.Optional;
 
 /*
 * repository는 단순히 기술 의존적으로 네이밍 하지만 service쪽은 비지니스 의존적으로 네이밍*/
+
+@Service
+// @Service 에노테이션이 없을시 순수 자바 코드 이기때문에
+// 스프링이 알 수 있는 방법이 없기 때문에
+// @Service 에노테이션을 넣어 주어야함
 public class MemberService {
     // Ctrl + Shift + T 를 누를 시 자동으로 테스트를 만들어줌
     private final MemberRepository memberRepository;
 
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
