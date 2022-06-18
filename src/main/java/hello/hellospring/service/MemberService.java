@@ -12,7 +12,7 @@ import java.util.Optional;
 /*
 * repository는 단순히 기술 의존적으로 네이밍 하지만 service쪽은 비지니스 의존적으로 네이밍*/
 
-@Service
+//@Service 구현체를 바꿔야하기 때문에 자바 코드로 스프링 빈을 등록하였음
 // @Service 에노테이션이 없을시 순수 자바 코드 이기때문에
 // 스프링이 알 수 있는 방법이 없기 때문에
 // @Service 에노테이션을 넣어 주어야함
@@ -20,7 +20,8 @@ public class MemberService {
     // Ctrl + Shift + T 를 누를 시 자동으로 테스트를 만들어줌
     private final MemberRepository memberRepository;
 
-    @Autowired
+//    @Autowired 구현체를 바꿔야하기 때문에 자바 코드로 스프링 빈을 등록하였음
+    // @Autowired는 스프링에 등록되고 스프링이 관리를 해야만 작동함
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
