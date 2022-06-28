@@ -3,6 +3,7 @@ package hello.hellospring.repository;
 import hello.hellospring.domain.Member;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +12,7 @@ import java.util.Optional;
 // 스프링이 알 수 있는 방법이 없기 때문에
 // @Repository에노테이션을 넣어 주어야함
 public interface MemberRepository {
-    Member save(Member member);
+    Member save(Member member) throws SQLException;
     Optional<Member> findById(Long id);
     Optional<Member> findByName(String name);
     List<Member> findAll();

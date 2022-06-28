@@ -1,24 +1,39 @@
 package hello.hellospring;
 
+import hello.hellospring.repository.JdbcMemberRepository;
 import hello.hellospring.repository.MemberRepository;
-import hello.hellospring.repository.MemoryMemberRepository;
 import hello.hellospring.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.sql.DataSource;
+
 @Configuration
-// @Service ,@Repository, @Autowired 에노테이션을 제거 후
-// 순수 자바 코드로 직접 스프링 빈 주입 시 config 클래스 작성하다
-// @Configuration 적어 준 후 @Bean을 이용하여 스프링빈에 등록 된다.
+/* @Service ,@Repository, @Autowired 에노테이션을 제거 후
+ 순수 자바 코드로 직접 스프링 빈 주입 시 config 클래스 작성하다
+ @Configuration 적어 준 후 @Bean을 이용하여 스프링빈에 등록 된다.
+ */
 public class SpringConfig {
 
+    final private DataSource dataSource;
+    @Autowired
+    public SpringConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     @Bean
-    public MemberService memberService(){
+    public MemberService memberService() {
         return new MemberService(memberRepository());
     }
+
     @Bean
-    public MemberRepository memberRepository(){
-        return new MemoryMemberRepository();
+    public MemberRepository memberRepository() {
+//        return new MemoryMemberRepository();
+//        메모리에 저장 하는 방식
+
+        // Jdbc를 이용하여 DB를 사용하는 방식
+        return new JdbcMemberRepository(dataSource);
     }
 }
 // DI에는 필드 주입,setter, 생성자 주입 3가지 법법이 존재

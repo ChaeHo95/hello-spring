@@ -5,6 +5,7 @@ import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class MemberService {
     /*
      * 회원 가입
      */
-    public Long join(Member member) {
+    public Long join(Member member) throws SQLException {
         // 같은 이름이 있는 중복 회원 X
 
         // 로직이 나올 때는 메소드로 뽑는게 좋기 때문에 메소드로 전환
