@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -35,7 +37,7 @@ class MemberServiceTest {
     }
 
     @Test
-    void join() {
+    void join() throws SQLException {
         // given
         Member member = new Member();
         member.setName("hello");
@@ -49,7 +51,7 @@ class MemberServiceTest {
     }
     // 중복 회원 검증 테스트
     @Test
-    public void duplicateMemberException(){
+    public void duplicateMemberException() throws SQLException {
         //given
         Member member1 = new Member();
         member1.setName("spring");
