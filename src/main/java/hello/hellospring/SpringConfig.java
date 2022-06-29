@@ -1,6 +1,7 @@
 package hello.hellospring;
 
 import hello.hellospring.repository.JdbcMemberRepository;
+import hello.hellospring.repository.JdbcTemplatMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,9 @@ import javax.sql.DataSource;
 public class SpringConfig {
 
     final private DataSource dataSource;
+/*
     @Autowired
+*/
     public SpringConfig(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -33,7 +36,10 @@ public class SpringConfig {
 //        메모리에 저장 하는 방식
 
         // Jdbc를 이용하여 DB를 사용하는 방식
-        return new JdbcMemberRepository(dataSource);
+//        return new JdbcMemberRepository(dataSource);
+
+        // jdbcTemplat 이용하여 DB를 사용하는 방식
+        return new JdbcTemplatMemberRepository(dataSource);
     }
 }
 // DI에는 필드 주입,setter, 생성자 주입 3가지 법법이 존재

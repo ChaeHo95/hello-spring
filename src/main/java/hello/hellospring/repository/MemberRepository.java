@@ -12,7 +12,7 @@ import java.util.Optional;
 // 스프링이 알 수 있는 방법이 없기 때문에
 // @Repository에노테이션을 넣어 주어야함
 public interface MemberRepository {
-    Member save(Member member) throws SQLException;
+    Member save(Member member);
     Optional<Member> findById(Long id);
     Optional<Member> findByName(String name);
     List<Member> findAll();
