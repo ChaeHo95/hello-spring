@@ -1,5 +1,6 @@
 package hello.hellospring;
 
+import hello.hellospring.app.TimeTraceApp;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,11 @@ public class SpringConfig {
         // Jpa를 이용하여 DB를 사용하는 방식
 //        return  new JpaMemberRepository(entityManager);
     }*/
+
+    @Bean // AOP는 스프링 빈에 등록 해서 사용하는 것을 선호
+    public TimeTraceApp timeTraceApp(){
+        return new TimeTraceApp();
+    }
 }
 // DI에는 필드 주입,setter, 생성자 주입 3가지 법법이 존재
 // DI(Dependency Injection)란 의존성 주입
