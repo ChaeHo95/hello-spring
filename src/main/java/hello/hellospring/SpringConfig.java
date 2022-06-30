@@ -1,14 +1,13 @@
 package hello.hellospring;
 
-import hello.hellospring.repository.JdbcMemberRepository;
-import hello.hellospring.repository.JdbcTemplatMemberRepository;
+import hello.hellospring.repository.JpaMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
 
 @Configuration
 /* @Service ,@Repository, @Autowired 에노테이션을 제거 후
@@ -17,13 +16,22 @@ import javax.sql.DataSource;
  */
 public class SpringConfig {
 
-    final private DataSource dataSource;
-/*
+    // Jdbc나 jdbcTemplat를 사용 시
+    /*inal private DataSource dataSource;
+*//*
     @Autowired
-*/
+*//*
     public SpringConfig(DataSource dataSource) {
         this.dataSource = dataSource;
+    }*/
+
+    // jpa 사용시 EntityManager 가 필요
+    private EntityManager entityManager;
+    @Autowired
+    public SpringConfig(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
+
 
     @Bean
     public MemberService memberService() {
@@ -38,8 +46,11 @@ public class SpringConfig {
         // Jdbc를 이용하여 DB를 사용하는 방식
 //        return new JdbcMemberRepository(dataSource);
 
-        // jdbcTemplat 이용하여 DB를 사용하는 방식
-        return new JdbcTemplatMemberRepository(dataSource);
+        // jdbcTemplat를 이용하여 DB를 사용하는 방식
+//        return new JdbcTemplatMemberRepository(dataSource);
+
+        // Jpa를 이용하여 DB를 사용하는 방식
+        return  new JpaMemberRepository(entityManager);
     }
 }
 // DI에는 필드 주입,setter, 생성자 주입 3가지 법법이 존재

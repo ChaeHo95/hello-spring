@@ -37,7 +37,7 @@ class MemberServiceTest {
     }
 
     @Test
-    void 회원가입() throws SQLException {
+    void 회원가입()  {
         // given
         Member member = new Member();
         member.setName("hello");
@@ -51,7 +51,7 @@ class MemberServiceTest {
     }
     // 중복 회원 검증 테스트
     @Test
-    public void 중복_회원_예외() throws SQLException {
+    public void 중복_회원_예외() {
         //given
         Member member1 = new Member();
         member1.setName("spring");
