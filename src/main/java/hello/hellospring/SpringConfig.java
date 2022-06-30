@@ -1,13 +1,10 @@
 package hello.hellospring;
 
-import hello.hellospring.repository.JpaMemberRepository;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.persistence.EntityManager;
 
 @Configuration
 /* @Service ,@Repository, @Autowired 에노테이션을 제거 후
@@ -26,19 +23,25 @@ public class SpringConfig {
     }*/
 
     // jpa 사용시 EntityManager 가 필요
-    private EntityManager entityManager;
+//    private EntityManager entityManager;
+//    @Autowired
+//    public SpringConfig(EntityManager entityManager) {
+//        this.entityManager = entityManager;
+//    }
+    // springDataJpa 가 만들어 놓은 구현체 는 자동으로 등록 됨
+    private final MemberRepository memberRepository;
     @Autowired
-    public SpringConfig(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
-
+    // SpringDataJpa를 이용하실 밑의 코드가 필요 없음
     @Bean
     public MemberService memberService() {
-        return new MemberService(memberRepository());
+        return new MemberService(memberRepository);
     }
 
-    @Bean
+/*    @Bean
     public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository();
 //        메모리에 저장 하는 방식
@@ -50,8 +53,8 @@ public class SpringConfig {
 //        return new JdbcTemplatMemberRepository(dataSource);
 
         // Jpa를 이용하여 DB를 사용하는 방식
-        return  new JpaMemberRepository(entityManager);
-    }
+//        return  new JpaMemberRepository(entityManager);
+    }*/
 }
 // DI에는 필드 주입,setter, 생성자 주입 3가지 법법이 존재
 // DI(Dependency Injection)란 의존성 주입
